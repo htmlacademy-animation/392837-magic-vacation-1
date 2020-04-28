@@ -89,12 +89,25 @@
   }
 }
 
+@keyframes slider__item-text-animation {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .slider__item-text {
   margin-top: 3.6rem;
   margin-bottom: 0;
   max-width: 34rem;
   font-size: 1.8rem;
   line-height: 2rem;
+  animation: 0.3s ease-out slider__item-text-animation;
 
   @media (min-width: $stop-scaling) {
     margin-top: 36px;

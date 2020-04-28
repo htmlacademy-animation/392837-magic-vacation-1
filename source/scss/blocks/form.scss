@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .form__label {
@@ -29,6 +30,16 @@
   }
 }
 
+@keyframes form__field-animation {
+  from {
+    width: 30px;
+  }
+
+  to {
+    width: calc(100% - 21rem);
+  }
+}
+
 .form__field {
   flex: none;
   margin-right: 3rem;
@@ -42,6 +53,7 @@
   color: $c-dark;
   border: 0;
   border-radius: 3rem;
+  animation: 0.3s ease-out form__field-animation;
 
   @media (min-width: $stop-scaling) {
     margin-right: 30px;
@@ -74,8 +86,6 @@
 }
 
 .form__button {
-  flex-grow: 1;
-
   @media (orientation: portrait) {
     position: relative;
     flex: none;
