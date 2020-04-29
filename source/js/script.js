@@ -7,17 +7,19 @@ import chat from './modules/chat.js';
 import result from './modules/result.js';
 import form from './modules/form.js';
 import social from './modules/social.js';
+import contentReady from './modules/content-ready';
 import FullPageScroll from './modules/full-page-scroll';
 
-// init modules
-mobileHeight();
-slider();
-menu();
-footer();
-chat();
-result();
-form();
-social();
+contentReady(() => {
+  mobileHeight();
+  slider();
+  menu();
+  footer();
+  chat();
+  result();
+  form();
+  social();
+});
 
 const fullPageScroll = new FullPageScroll();
 fullPageScroll.init();
