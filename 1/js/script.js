@@ -10549,7 +10549,7 @@ __webpack_require__.r(__webpack_exports__);
     setSlider();
   });
 
-  setSlider();
+  Promise.resolve().then(() => setSlider());
 });
 
 
