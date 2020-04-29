@@ -76,5 +76,5 @@ export default () => {
     setSlider();
   });
 
-  setSlider();
+  Promise.resolve().then(() => setSlider());
 };
