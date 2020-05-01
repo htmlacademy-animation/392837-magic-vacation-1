@@ -1,26 +1,40 @@
 import throttle from 'lodash/throttle';
 
+const SCREENS = {
+  top: 0,
+  story: 1,
+  prizes: 2,
+};
+
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
+    this.storyOverlay = document.querySelector(`.story__overlay`);
 
-    this.activeScreen = 0;
+    this.activeScreen = SCREENS.top;
+    this.previousScreen = null;
     this.onScrollHandler = this.onScroll.bind(this);
-    this.onUrlHashChengedHandler = this.onUrlHashChenged.bind(this);
+    this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
 
   init() {
     document.addEventListener(`wheel`, throttle(this.onScrollHandler, this.THROTTLE_TIMEOUT));
     window.addEventListener(`popstate`, this.onUrlHashChengedHandler);
+    this.storyOverlay.addEventListener(`transitionend`, () => {
+      this.removeActiveFlgFromScreen();
+      this.addActiveFlgToScreen();
+      this.storyOverlay.classList.remove(`story__overlay--active`);
+    });
 
-    this.onUrlHashChenged();
+    this.onUrlHashChanged();
     this.changePageDisplay();
   }
 
   onScroll(evt) {
+    this.previousScreen = this.activeScreen;
     const currentPosition = this.activeScreen;
     this.reCalculateActiveScreenPosition(evt.deltaY);
     if (currentPosition !== this.activeScreen) {
@@ -28,9 +42,10 @@ export default class FullPageScroll {
     }
   }
 
-  onUrlHashChenged() {
+  onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
-    this.activeScreen = (newIndex < 0) ? 0 : newIndex;
+    this.previousScreen = this.activeScreen;
+    this.activeScreen = (newIndex < SCREENS.top) ? SCREENS.top : newIndex;
     this.changePageDisplay();
   }
 
@@ -40,13 +55,25 @@ export default class FullPageScroll {
     this.emitChangeDisplayEvent();
   }
 
-  changeVisibilityDisplay() {
+  addActiveFlgToScreen() {
+    this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
+    this.screenElements[this.activeScreen].classList.add(`active`);
+  }
+
+  removeActiveFlgFromScreen() {
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
     });
-    this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
-    this.screenElements[this.activeScreen].classList.add(`active`);
+  }
+
+  changeVisibilityDisplay() {
+    if (this.previousScreen === SCREENS.story && this.activeScreen === SCREENS.prizes) {
+      this.storyOverlay.classList.add(`story__overlay--active`);
+    } else {
+      this.removeActiveFlgFromScreen();
+      this.addActiveFlgToScreen();
+    }
   }
 
   changeActiveMenuItem() {
@@ -73,7 +100,7 @@ export default class FullPageScroll {
     if (delta > 0) {
       this.activeScreen = Math.min(this.screenElements.length - 1, ++this.activeScreen);
     } else {
-      this.activeScreen = Math.max(0, --this.activeScreen);
+      this.activeScreen = Math.max(SCREENS.top, --this.activeScreen);
     }
   }
 }
