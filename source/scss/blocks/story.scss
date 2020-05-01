@@ -1,0 +1,21 @@
+.story {
+  position: relative;
+
+  &__overlay {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: $c-dark;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform ease-out 0.6s;
+
+    &--active {
+      transform: scaleY(1);
+    }
+  }
+}
+
