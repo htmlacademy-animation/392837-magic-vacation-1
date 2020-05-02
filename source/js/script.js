@@ -7,6 +7,7 @@ import chat from './modules/chat.js';
 import result from './modules/result.js';
 import form from './modules/form.js';
 import social from './modules/social.js';
+import rules from './modules/rules.js';
 import contentReady from './modules/content-ready';
 import FullPageScroll from './modules/full-page-scroll';
 
@@ -19,6 +20,7 @@ contentReady(() => {
   result();
   form();
   social();
+  rules();
 });
 
 const fullPageScroll = new FullPageScroll();

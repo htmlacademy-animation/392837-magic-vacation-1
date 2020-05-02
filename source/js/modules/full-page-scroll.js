@@ -1,10 +1,6 @@
 import throttle from 'lodash/throttle';
 
-const SCREENS = {
-  top: 0,
-  story: 1,
-  prizes: 2,
-};
+import {SCREEN_ID} from '../constants';
 
 export default class FullPageScroll {
   constructor() {
@@ -14,7 +10,7 @@ export default class FullPageScroll {
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
     this.storyOverlay = document.querySelector(`.story__overlay`);
 
-    this.activeScreen = SCREENS.top;
+    this.activeScreen = SCREEN_ID.top;
     this.previousScreen = null;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
@@ -45,7 +41,7 @@ export default class FullPageScroll {
   onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
     this.previousScreen = this.activeScreen;
-    this.activeScreen = (newIndex < SCREENS.top) ? SCREENS.top : newIndex;
+    this.activeScreen = (newIndex < SCREEN_ID.top) ? SCREEN_ID.top : newIndex;
     this.changePageDisplay();
   }
 
@@ -68,7 +64,7 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
-    if (this.previousScreen === SCREENS.story && this.activeScreen === SCREENS.prizes) {
+    if (this.previousScreen === SCREEN_ID.story && this.activeScreen === SCREEN_ID.prizes) {
       this.storyOverlay.classList.add(`story__overlay--active`);
     } else {
       this.removeActiveFlgFromScreen();
@@ -100,7 +96,7 @@ export default class FullPageScroll {
     if (delta > 0) {
       this.activeScreen = Math.min(this.screenElements.length - 1, ++this.activeScreen);
     } else {
-      this.activeScreen = Math.max(SCREENS.top, --this.activeScreen);
+      this.activeScreen = Math.max(SCREEN_ID.top, --this.activeScreen);
     }
   }
 }

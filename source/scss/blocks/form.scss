@@ -43,6 +43,8 @@
   border: 0;
   border-radius: 3rem;
   outline: none;
+  transform: scaleX(0);
+  transform-origin: right;
 
   &:focus {
     border: 1px solid $c-purple;
@@ -75,6 +77,18 @@
     width: calc(100% - 5rem);
     height: 4rem;
     font-size: 1.6rem;
+  }
+}
+
+@keyframes form__field-animation {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.active {
+  .form__field {
+    animation: form__field-animation ease-out 0.4s forwards;
   }
 }
 
