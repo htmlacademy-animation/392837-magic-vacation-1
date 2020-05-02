@@ -1,6 +1,9 @@
 .disclaimer {
   color: $c-dark;
   background-color: $c-light;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity ease-out 0.3s, transform ease-out 0.3s;
 
   @media (max-width: $tablet) and (orientation: portrait) {
     font-weight: 400;
@@ -88,5 +91,12 @@
     @media (max-width: $mobile) and (orientation: landscape) {
       padding: 0.9rem 0;
     }
+  }
+}
+
+.content-ready {
+  .disclaimer {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
