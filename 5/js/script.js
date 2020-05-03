@@ -10137,7 +10137,7 @@ const SCREEN_ID = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTextAnimation", function() { return createTextAnimation; });
-const createTextAnimation = ({selector, animationDelay = 0, maxSymbolAnimationDuration = 0.6}) => {
+const createTextAnimation = ({selector, animationDelay = 0, symbolMaxAnimationDuration = 0.6}) => {
   try {
     const element = document.querySelector(selector);
     const content = element.textContent.trim().split(` `).reduce((rootFragment, word) => {
@@ -10147,7 +10147,7 @@ const createTextAnimation = ({selector, animationDelay = 0, maxSymbolAnimationDu
 
         symbolElement.textContent = symbol;
         symbolElement.style.animationDelay = `${animationDelay}s`;
-        symbolElement.style.animationDuration = `${Math.random() * maxSymbolAnimationDuration}s`;
+        symbolElement.style.animationDuration = `${Math.random() * symbolMaxAnimationDuration}s`;
         symbolElement.classList.add(`animation-text__symbol`);
         wordFragment.append(symbolElement);
         return wordFragment;
@@ -10478,7 +10478,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
-  Object(_animation_text__WEBPACK_IMPORTED_MODULE_0__["createTextAnimation"])({selector: `.intro__title`, maxSymbolAnimationDuration: 1});
+  Object(_animation_text__WEBPACK_IMPORTED_MODULE_0__["createTextAnimation"])({selector: `.intro__title`, symbolMaxAnimationDuration: 1});
   Object(_animation_text__WEBPACK_IMPORTED_MODULE_0__["createTextAnimation"])({selector: `.intro__date`, animationDelay: 1});
 });
 
