@@ -10,7 +10,7 @@ export default class FullPageScroll {
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
     this.storyOverlay = document.querySelector(`.story__overlay`);
 
-    this.activeScreen = SCREEN_ID.top;
+    this.activeScreen = SCREEN_ID.intro;
     this.previousScreen = null;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
@@ -22,7 +22,6 @@ export default class FullPageScroll {
     this.storyOverlay.addEventListener(`transitionend`, () => {
       this.removeActiveFlgFromScreen();
       this.addActiveFlgToScreen();
-      this.storyOverlay.classList.remove(`story__overlay--active`);
     });
 
     this.onUrlHashChanged();
@@ -41,7 +40,7 @@ export default class FullPageScroll {
   onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
     this.previousScreen = this.activeScreen;
-    this.activeScreen = (newIndex < SCREEN_ID.top) ? SCREEN_ID.top : newIndex;
+    this.activeScreen = (newIndex < SCREEN_ID.intro) ? SCREEN_ID.intro : newIndex;
     this.changePageDisplay();
   }
 
@@ -60,6 +59,7 @@ export default class FullPageScroll {
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
+      this.storyOverlay.classList.remove(`story__overlay--active`);
     });
   }
 
@@ -96,7 +96,7 @@ export default class FullPageScroll {
     if (delta > 0) {
       this.activeScreen = Math.min(this.screenElements.length - 1, ++this.activeScreen);
     } else {
-      this.activeScreen = Math.max(SCREEN_ID.top, --this.activeScreen);
+      this.activeScreen = Math.max(SCREEN_ID.intro, --this.activeScreen);
     }
   }
 }
