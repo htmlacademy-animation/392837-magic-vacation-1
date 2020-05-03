@@ -3390,16 +3390,17 @@ img {
     opacity: 1;
     transform: translate3d(0, 0, 0); } }
 
-.animation-text__word {
-  display: inline-block;
-  overflow: hidden;
-  line-height: 1.3; }
-
-.animation-text__symbol {
-  display: inline-block;
-  opacity: 0;
-  transform: translate3d(0, 150%, 0);
-  animation: animation-text__symbol-animation ease-out forwards; }
+.animation-text {
+  opacity: 0; }
+  .animation-text__word {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1.3; }
+  .animation-text__symbol {
+    display: inline-block;
+    opacity: 0;
+    transform: translate3d(0, 150%, 0);
+    animation: animation-text__symbol-animation ease-out forwards; }
 
 
 /*# sourceMappingURL=style.min.css.map*/
