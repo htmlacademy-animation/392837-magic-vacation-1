@@ -136,7 +136,7 @@
 .slider__item.swiper-slide-active,
 .slider__item.swiper-slide-next {
   .slider__item-text {
-    animation: 0.3s ease-out slider__item-text-animation 0.3s forwards;
+    animation: 0.4s ease-out slider__item-text-animation 0.3s forwards;
   }
 }
 
@@ -260,11 +260,11 @@
 
 .screen--story.active {
   .slider__control--prev {
-    animation: slider__control-prev-animation ease-out 0.3s;
+    animation: slider__control-prev-animation ease-out 0.5s;
   }
 
   .slider__control--next {
-    animation: slider__control-next-animation ease-out 0.3s;
+    animation: slider__control-next-animation ease-out 0.5s;
   }
 }
 

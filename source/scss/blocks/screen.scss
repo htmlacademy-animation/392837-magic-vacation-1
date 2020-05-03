@@ -39,7 +39,7 @@
 }
 
 .screen__footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -50,7 +50,7 @@
   transform: translateY(100%);
   transition-property: opacity, transform;
   transition-timing-function: cubic-bezier(0, 0.83, 0.43, 1);
-  transition-duration: 0.3s;
+  transition-duration: 0.4s;
 
   @media (max-width: $tablet) and (orientation: portrait) {
     width: 3.5rem;
