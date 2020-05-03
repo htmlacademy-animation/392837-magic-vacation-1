@@ -170,6 +170,22 @@
   }
 }
 
+@mixin slider__control-animation($direction: 1) {
+  @for $i from 0 through 4 {
+    #{$i * 25%} {
+      transform: translate3d(#{$direction * (20 - $i * 5)}rem, 0, 0) rotate3d(0, 0, 1, #{$i * 90}deg);
+    }
+  }
+}
+
+@keyframes slider__control-prev-animation {
+  @include slider__control-animation(-1);
+}
+
+@keyframes slider__control-next-animation {
+  @include slider__control-animation();
+}
+
 .slider__control {
   @include btn-reset;
   position: relative;
@@ -239,6 +255,16 @@
   &.swiper-button-disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+}
+
+.screen--story.active {
+  .slider__control--prev {
+    animation: slider__control-prev-animation ease-out 0.3s;
+  }
+
+  .slider__control--next {
+    animation: slider__control-next-animation ease-out 0.3s;
   }
 }
 
