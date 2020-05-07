@@ -23,13 +23,6 @@
   }
 }
 
-@keyframes rules__text-animation {
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 .rules__title {
   margin: 0 0 5rem;
   text-transform: uppercase;
@@ -38,8 +31,6 @@
   font-size: 4.8rem;
   line-height: 0.906;
   letter-spacing: -0.04em;
-  opacity: 0;
-  transform: translate3d(0, 30px, 0);
 
   @media (min-width: $stop-scaling) {
     margin-bottom: 50px;
@@ -68,8 +59,6 @@
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.2;
-  opacity: 0;
-  transform: translate3d(0, 30px, 0);
 
   @media (min-width: $stop-scaling) {
     margin-left: 58px;
@@ -128,34 +117,17 @@
   }
 }
 
-@keyframes rules__item-text-animation {
-  70% {
-    opacity: 0.4;
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes rules__item-circle-animation {
-  to {
-    transform: scale(1);
-  }
-}
-
 .rules__item {
   position: relative;
   margin: 0 0 6.2rem;
-  padding-top: 1rem;
+  padding-top: 0.6rem;
   padding-left: 6.5rem;
   break-inside: avoid;
 
   @media (min-width: $stop-scaling) {
     margin: 0 0 62px;
     padding-top: 6px;
-    padding-left: 65px;
+    min-height: 5rem;
   }
 
   @media (max-width: $tablet) and (orientation: portrait) {
@@ -177,11 +149,9 @@
     counter-increment: li;
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
     width: 4.5rem;
     height: 4.5rem;
-    margin: auto 0;
     font-family: $font-alt;
     font-weight: 400;
     font-size: 2.4rem;
@@ -189,8 +159,6 @@
     border-radius: 50%;
     line-height: 5rem;
     text-align: center;
-    overflow: visible;
-    transform: scale(0);
 
     @media (max-width: $tablet) and (orientation: portrait) {
       top: 1rem;
@@ -211,39 +179,9 @@
 
   p {
     margin: 0;
-    opacity: 0;
-    transform: translate3d(30px, 0, 0);
 
     @media (max-width: $tablet) and (orientation: portrait) {
       min-height: calc(1.4rem * 2.2);
-    }
-  }
-}
-
-$rules-title-animation-duration: 0.4;
-$rules-lead-animation-duration: 0.4;
-$initial-rules-item-animation-delay: $rules-title-animation-duration + $rules-lead-animation-duration;
-
-.active {
-  .rules__title {
-    animation: rules__text-animation ease-out #{$rules-title-animation-duration}s forwards;
-  }
-
-  .rules__lead {
-    animation: rules__text-animation ease-out #{$rules-lead-animation-duration}s forwards #{$rules-title-animation-duration}s;
-  }
-
-  .rules__item {
-    @for $i from 1 through 4 {
-      &:nth-child(#{$i}) {
-        &::before {
-          animation: rules__item-circle-animation cubic-bezier(0, 1.58, 0.91, 0.99) 0.4s forwards #{$initial-rules-item-animation-delay + $i * 0.4}s;
-        }
-
-        p {
-          animation: rules__item-text-animation ease-out 0.4s forwards #{$initial-rules-item-animation-delay + $i * 0.3}s;
-        }
-      }
     }
   }
 }
@@ -252,9 +190,6 @@ $initial-rules-item-animation-delay: $rules-title-animation-duration + $rules-le
   position: absolute;
   bottom: 6rem;
   right: 5.6rem;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform ease-out 0.3s;
 
   @media (min-width: $stop-scaling) {
     bottom: 60px;
@@ -274,9 +209,5 @@ $initial-rules-item-animation-delay: $rules-title-animation-duration + $rules-le
   @media (max-width: $mobile) and (orientation: landscape) {
     bottom: 2rem;
     right: 1.5rem;
-  }
-
-  &-ready {
-    transform: scaleX(1);
   }
 }
